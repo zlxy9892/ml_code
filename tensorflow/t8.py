@@ -17,6 +17,14 @@ def add_layer(inputs, in_size, out_size, activation_function=None):
         outputs = activation_function(z)
     return outputs
 
+def compute_accuracy(v_xs, v_ys):
+    global prediction
+    y_pred = sess.run(prediction, feed_dict={xs: v_xs})
+    correct_prediction = tf.equal(tf.argmax(y_pred, 1), tf.argmax(v_ys, 1))
+    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
+    result = sess.run(accuracy, feed_dict={xs: v_xs, ys: v_ys})
+    return result
+
 # define placeholder for inputs network
 xs = tf.placeholder(tf.float32, [None, 784]) # 784 = 28*28
 ys = tf.placeholder(tf.float32, [None, 10])  # 0-9
@@ -25,31 +33,20 @@ ys = tf.placeholder(tf.float32, [None, 10])  # 0-9
 prediction = add_layer(xs, 784, 10, activation_function=tf.nn.softmax)
 
 # the error between prediction and true value
-cross_entropy = tf.reduce_mean(-tf.reduce_sum(ys * tf.log(prediction)),
-                               reduction_indices=[1])
+#cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=ys, logits=prediction))
+cross_entropy = tf.reduce_mean(-tf.reduce_sum(ys * tf.log(prediction), reduction_indices=[1]))
 train_step = tf.train.GradientDescentOptimizer(learning_rate=0.5).minimize(cross_entropy)
 
-sess = tf.Session()
-sess.run(tf.global_variables_initializer())
+sess = tf.InteractiveSession()
+tf.global_variables_initializer().run()
 
-for i in range(1000):
-    batch_xs, batch_ys = mnist.train.next_batch(100)
-    if i % 50 == 0:
-        pass
+for i in range(10000):
+  batch_xs, batch_ys = mnist.train.next_batch(100)
+  sess.run(train_step, feed_dict={xs: batch_xs, ys: batch_ys})
+  if i % 50 == 0:
+      correct_prediction = tf.equal(tf.argmax(prediction,1), tf.argmax(ys,1))
+      accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
+      #print(sess.run(accuracy, feed_dict={xs: mnist.test.images, ys: mnist.test.labels}))
+      print(accuracy.eval(feed_dict={xs: mnist.test.images, ys: mnist.test.labels}))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+sess.close()
