@@ -70,14 +70,3 @@ for i in range(5000):
 train_writer.close()
 test_writer.close()
 sess.close()
-
-
-
-
-
-
-
-
-
-
-

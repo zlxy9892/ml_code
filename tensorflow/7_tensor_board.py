@@ -64,16 +64,3 @@ for i in range(1000):
 
 writer.close()
 sess.close()
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+# liner regression by tensorflow
+
 import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt

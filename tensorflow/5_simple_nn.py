@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# result visualization
+# design a neural network
 
 import numpy as np
 import tensorflow as tf
-import matplotlib.pyplot as plt
 
 def add_layer(inputs, in_size, out_size, activation_function=None):
     weights = tf.Variable(tf.random_normal([in_size, out_size]))
@@ -35,27 +34,7 @@ init = tf.global_variables_initializer()
 sess = tf.Session()
 sess.run(init)
 
-fig = plt.figure()
-ax = fig.add_subplot(1, 1, 1)
-ax.scatter(X_train, y_train)
-plt.ion()
-plt.show()
-
-for i in range(10000):
+for i in range(1000):
     sess.run(train_step, feed_dict={xs: X_train, ys: y_train})
     if i % 50 == 0:
-        #print(sess.run(loss, feed_dict={xs: X_train, ys: y_train}))
-        try:
-            ax.lines.remove(lines[0])
-        except Exception:
-            pass
-        pred_value = sess.run(y_pred, feed_dict={xs: X_train})
-        lines = ax.plot(X_train, pred_value, 'r-', lw=5)
-        plt.pause(0.1)
-
-
-
-
-
-
-
+        print(sess.run(loss, feed_dict={xs: X_train, ys: y_train}))
