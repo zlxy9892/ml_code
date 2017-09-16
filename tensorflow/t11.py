@@ -78,16 +78,3 @@ with tf.Session() as sess:
         if step % 20 == 0:
             print(sess.run(accuracy, feed_dict={x:batch_xs, y:batch_ys}))
         step += 1
-
-
-
-
-
-
-
-
-
-
-
-
-
