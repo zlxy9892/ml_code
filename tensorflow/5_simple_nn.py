@@ -38,3 +38,4 @@ for i in range(1000):
     sess.run(train_step, feed_dict={xs: X_train, ys: y_train})
     if i % 50 == 0:
         print(sess.run(loss, feed_dict={xs: X_train, ys: y_train}))
+sess.close()
