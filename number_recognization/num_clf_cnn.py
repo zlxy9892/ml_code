@@ -11,13 +11,13 @@ IMG_Y = 28
 INPUT_DIM = IMG_X * IMG_Y
 OUTPUT_DIM = 10
 LR = 1e-4
-MAX_LOOP = 1000
+MAX_LOOP = 10000
 BATCH_SIZE = 50
 KEEP_PROB = 0.5
 ### hyper parameters ###
 
 # load data
-mnist = input_data.read_data_sets('D:/data/ml_data/MNIST_data', one_hot=True)
+mnist = input_data.read_data_sets('data/MNIST_data', one_hot=True)
 X_train = mnist.train.images
 y_train = mnist.train.labels
 X_test = mnist.test.images
@@ -46,6 +46,16 @@ def conv_2d(x, W):
 # pooling layer
 def max_pool_2x2(x):
     return tf.nn.max_pool(value=x, ksize=[1,2,2,1], strides=[1,2,2,1], padding='SAME')
+
+def train_model(sess):
+    sess.run(tf.global_variables_initializer())
+    for i in range(MAX_LOOP):
+        X_batch, y_batch = get_batch_data(X_train, y_train, BATCH_SIZE)
+        sess.run(train_step, feed_dict={xs: X_batch, ys: y_batch, keep_prob: KEEP_PROB})
+        if i % 100 == 0:
+            print('正在训练: %5.1f' % (100*float(i)/MAX_LOOP), '%')
+            print('loss:\t', sess.run(loss, feed_dict={xs: X_batch, ys: y_batch, keep_prob: 1.0}))
+            print('train accurary:\t', sess.run(accuracy, feed_dict={xs: X_batch, ys: y_batch, keep_prob: 1.0}))
 
 # ---------------------------- main ---------------------------- #
 # define placeholder
@@ -89,21 +99,21 @@ train_step = tf.train.AdamOptimizer(LR).minimize(loss)
 correct_prediction = tf.equal(tf.argmax(y_pred, 1), tf.argmax(ys, 1))
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
+saver = tf.train.Saver()
+
 # start session
 config = tf.ConfigProto()
 config.gpu_options.allow_growth = True
 with tf.Session(config=config) as sess:
-    sess.run(tf.global_variables_initializer())
-    for i in range(MAX_LOOP):
-        X_batch, y_batch = get_batch_data(X_train, y_train, BATCH_SIZE)
-        sess.run(train_step, feed_dict={xs: X_batch, ys: y_batch, keep_prob: KEEP_PROB})
-        if i % 100 == 0:
-            print('train accurary:\t', sess.run(accuracy, feed_dict={xs: X_batch, ys: y_batch, keep_prob: 1.0}))
+    train_model(sess)
+    
+    #saver.restore(sess, "./Model/cnn_model.ckpt")
+    #saver.save(sess, 'Model/cnn_model.ckpt')
     
     import img_proc
     for num in range(10):
         #filename = 'test_data/0_28x28.jpg'
-        filename = 'test_data/' + str(num) + '_28x28.jpg'
+        filename = 'test_data/' + str(num) + '.jpg'
         digit_test = img_proc.getImgAsMatFromFile(filename)
         digit_test = digit_test.reshape((-1))
         pred = sess.run(y_pred, feed_dict={xs: digit_test[np.newaxis, :], keep_prob: 1.0})
@@ -112,7 +122,6 @@ with tf.Session(config=config) as sess:
         print('predict_number:\t', np.argmax(pred, 1))
 
 print('\n--- DONE! ---')
-    
-    
-    
 
+import os
+os.system('pause')
