@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-# data preparation
+# data generation
 np.random.seed(314)
 data_size_1 = 300
 x1_1 = np.random.normal(loc=5.0, scale=1.0, size=data_size_1)

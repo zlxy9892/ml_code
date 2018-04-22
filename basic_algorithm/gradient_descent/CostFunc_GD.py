@@ -30,7 +30,7 @@ def showData(X, y):
     plt.title('x-y data')
     plt.scatter(X[:, 0], y)
     plt.show()
-    
+
 def showTheta_Cost(theta_list, cFunc=costFunc):
     cost_list = []
     for theta in theta_list:
@@ -61,8 +61,3 @@ showTheta_Cost(thetaArr, cFunc=costFunc)
 plt.title('best regression model')
 plt.scatter(X[:, 0], y, c='b')
 plt.plot(X[:, 0], hypo(X, theta), 'r')
-
-
-
-
-

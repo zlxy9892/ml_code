@@ -55,7 +55,7 @@ def kmeans(dataMat, k, distMeasure=distEuclid, createCent=randCenter):
             if clusterAssment[i, 0] != minIndex:
                 clusterChanged = True
             clusterAssment[i, :] = minIndex, minDist**2
-        print centroids
+        print(centroids)
         for cent in range(k):  # 更新中心点
             ix = np.nonzero(clusterAssment[:, 0].A == cent)[0]
             ptsInClust = dataMat[ix]

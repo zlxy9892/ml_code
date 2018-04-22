@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+
 import numpy as np
 import matplotlib.pyplot as plt
+
 
 # CART 的节点
 class treeNode():
@@ -86,6 +88,6 @@ def createRegTree(dataSet, leafType=regLeaf, errType=regErr, ops=(1,4)):
 dataSet = loadDataSet('./data/ex0.txt')
 dataSet = np.mat(dataSet)
 regTree = createRegTree(dataSet)
-print regTree
+print(regTree)
 #print dataSet
 showData(dataSet)

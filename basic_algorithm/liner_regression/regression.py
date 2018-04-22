@@ -25,22 +25,22 @@ def standRegression(xArr, yArr):
     yMat = np.mat(yArr).T
     xTx = xMat.T * xMat
     if np.linalg.det(xTx) == 0.0:
-        print "this matrix is singular, cannot do inverse"
+        print("this matrix is singular, cannot do inverse")
         return
     ws = xTx.I * (xMat.T * yMat)
     return ws
 
 # 绘制数据
 def showData(xMat, yMat, ws):
-    xMat = np.mat(xMat)
-    yMat = np.mat(yMat)
+    xMat = np.array(xMat)
+    yMat = np.array(yMat)
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    ax.scatter(xMat[:, 1], yMat)
+    ax.scatter(xMat[:, 1], yMat, marker='.')
     xCopy = xMat.copy()
     xCopy.sort(0)
     yHat = xCopy * ws
-    ax.plot(xCopy[:, 1], yHat)
+    ax.plot(xCopy[:, 1], yHat, c='red')
     plt.show()
 
 
@@ -51,11 +51,9 @@ xArr, yArr = loadDataSet('./data/ex0.txt')
 xMat = np.mat(xArr)
 yMat = np.mat(yArr)
 ws = standRegression(xMat, yMat)
-print ws
+print(ws)
 
 yHat = xMat * ws
-print np.corrcoef(yHat.T, yMat)
+print(np.corrcoef(yHat.T, yMat))
 
 showData(xMat, yMat, ws)
-
-

@@ -29,7 +29,7 @@ def setOfWords2Vec(vocabList, inputSet):
         if word in vocabList:
             resVec[vocabList.index(word)] = 1
         else:
-            print "the word: %s is not in my Vocabulary!" % word
+            print("the word: {:s} is not in my Vocabulary!".format(word))
     return resVec
 
 # 训练朴素贝叶斯分类器
@@ -73,10 +73,10 @@ def testingNB():
     p0v, p1v, pAb = trainNB0(trainMat, listClasses)
     testEntry = ['love', 'my', 'dalmation']
     thisDoc = np.array(setOfWords2Vec(myVocabList, testEntry))
-    print testEntry, 'classified as: ', classifyNB(thisDoc, p0v, p1v, pAb)
+    print(testEntry, 'classified as: ', classifyNB(thisDoc, p0v, p1v, pAb))
     testEntry = ['stupid', 'garbage']
     thisDoc = np.array(setOfWords2Vec(myVocabList, testEntry))
-    print testEntry, 'classified as: ', classifyNB(thisDoc, p0v, p1v, pAb)
+    print(testEntry, 'classified as: ', classifyNB(thisDoc, p0v, p1v, pAb))
 
 
 # ---------------------------- main ---------------------------- #
