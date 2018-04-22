@@ -11,7 +11,7 @@ def d_f_1(x):
     return 2.0 * x
 
 def d_f_2(f, x, delta=1e-4):
-    return (f(x+delta) - f(x)) / delta
+    return (f(x+delta) - f(x-delta)) / (2 * delta)
 
 
 # plot the function
