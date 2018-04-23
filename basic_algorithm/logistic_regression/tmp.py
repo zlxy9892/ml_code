@@ -72,7 +72,7 @@ def showData(X, y):
 
 def showCost(cost_list):
     plt.plot(cost_list)
-    
+
 
 # ------------------------------------ #
 

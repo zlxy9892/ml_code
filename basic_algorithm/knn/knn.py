@@ -3,7 +3,7 @@
 import numpy as np
 import operator
 
-class knn_clf(object):
+class KNN(object):
 
     def __init__(self, k=3):
         self.k = k
@@ -12,10 +12,10 @@ class knn_clf(object):
         self.x_train = x
         self.y_train = y
 
-    def square_distance(self, v1, v2):
+    def _square_distance(self, v1, v2):
         return np.sum(np.square(v1-v2))
 
-    def vote(self, ys):
+    def _vote(self, ys):
         ys_unique = np.unique(ys)
         vote_dict = {}
         for y in ys:
@@ -29,10 +29,10 @@ class knn_clf(object):
     def predict(self, x):
         y_pred = []
         for i in range(len(x)):
-            dist_arr = [self.square_distance(x[i], self.x_train[j]) for j in range(len(self.x_train))]
+            dist_arr = [self._square_distance(x[i], self.x_train[j]) for j in range(len(self.x_train))]
             sorted_index = np.argsort(dist_arr)
             top_k_index = sorted_index[:self.k]
-            y_pred.append(self.vote(ys=self.y_train[top_k_index]))
+            y_pred.append(self._vote(ys=self.y_train[top_k_index]))
         return np.array(y_pred)
 
     def score(self, y_true=None, y_pred=None):

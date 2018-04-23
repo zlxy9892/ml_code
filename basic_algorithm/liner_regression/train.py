@@ -11,8 +11,9 @@ def show_data(x, y, w=None, b=None):
         plt.plot(x, w*x+b, c='red')
     plt.show()
 
+
 # data generation
-np.random.seed(314)
+np.random.seed(272)
 data_size = 100
 x = np.random.uniform(low=1.0, high=10.0, size=data_size)
 y = x * 20 + 10 + np.random.normal(loc=0.0, scale=10.0, size=data_size)
@@ -37,13 +38,13 @@ y_test = y[split_index:]
 # plt.show()
 
 # train the liner regression model
-regr = liner_regression(learning_rate=0.01, max_iter=10, seed=314)
+regr = LinerRegression(learning_rate=0.01, max_iter=10, seed=314)
 regr.fit(x_train, y_train)
-print('cost: \t{:.3}'.format(regr.cost()))
+print('cost: \t{:.3}'.format(regr.loss()))
 print('w: \t{:.3}'.format(regr.w))
 print('b: \t{:.3}'.format(regr.b))
 show_data(x, y, regr.w, regr.b)
 
 # plot the evolution of cost
-plt.scatter(np.arange(len(regr.cost_arr)), regr.cost_arr, marker='o', c='green')
+plt.scatter(np.arange(len(regr.loss_arr)), regr.loss_arr, marker='o', c='green')
 plt.show()

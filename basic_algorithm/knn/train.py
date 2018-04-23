@@ -2,6 +2,7 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
+from knn import *
 
 
 # data generation
@@ -42,9 +43,8 @@ plt.show()
 x_train = (x_train - np.min(x_train, axis=0)) / (np.max(x_train, axis=0) - np.min(x_train, axis=0))
 x_test = (x_test - np.min(x_test, axis=0)) / (np.max(x_test, axis=0) - np.min(x_test, axis=0))
 
-# knn model
-import knn
-clf = knn.knn_clf(k=3)
+# knn classifier
+clf = KNN(k=3)
 clf.fit(x_train, y_train)
 
 print('train accuracy: {:.3}'.format(clf.score()))
