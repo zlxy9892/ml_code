@@ -39,7 +39,7 @@ plt.show()
 plt.scatter(x_test[:,0], x_test[:,1], c=y_test, marker='.')
 plt.show()
 
-# data normalization
+# data preprocessing
 x_train = (x_train - np.min(x_train, axis=0)) / (np.max(x_train, axis=0) - np.min(x_train, axis=0))
 x_test = (x_test - np.min(x_test, axis=0)) / (np.max(x_test, axis=0) - np.min(x_test, axis=0))
 

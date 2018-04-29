@@ -9,8 +9,8 @@ class KNN(object):
         self.k = k
 
     def fit(self, x, y):
-        self.x_train = x
-        self.y_train = y
+        self.x = x
+        self.y = y
 
     def _square_distance(self, v1, v2):
         return np.sum(np.square(v1-v2))
@@ -29,16 +29,16 @@ class KNN(object):
     def predict(self, x):
         y_pred = []
         for i in range(len(x)):
-            dist_arr = [self._square_distance(x[i], self.x_train[j]) for j in range(len(self.x_train))]
+            dist_arr = [self._square_distance(x[i], self.x[j]) for j in range(len(self.x))]
             sorted_index = np.argsort(dist_arr)
             top_k_index = sorted_index[:self.k]
-            y_pred.append(self._vote(ys=self.y_train[top_k_index]))
+            y_pred.append(self._vote(ys=self.y[top_k_index]))
         return np.array(y_pred)
 
     def score(self, y_true=None, y_pred=None):
         if y_true is None and y_pred is None:
-            y_pred = self.predict(self.x_train)
-            y_true = self.y_train
+            y_pred = self.predict(self.x)
+            y_true = self.y
         score = 0.0
         for i in range(len(y_true)):
             if y_true[i] == y_pred[i]:
