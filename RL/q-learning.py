@@ -82,7 +82,7 @@ def rl():
             step_counter += 1
             update_env(S, episode, step_counter)    # 环境更新
     return q_table
-    
+
 
 ### ---------------------- main ---------------------- ###
 q_table = rl()

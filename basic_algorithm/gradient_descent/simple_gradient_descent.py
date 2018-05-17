@@ -26,8 +26,9 @@ x_init = 10.0
 x = x_init
 lr = 0.1
 for i in range(max_loop):
-    d_f_x = 2.0 * x
-    x = x - learning_rate * d_f_2(f, x)
+    # d_f_x = d_f_1(x)
+    d_f_x = d_f_2(f, x)
+    x = x - learning_rate * d_f_x
     print(x)
 
 print('initial x =', x_init)
