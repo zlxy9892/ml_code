@@ -29,6 +29,3 @@ A repository for recording machine learning code, including basic ml algorithms 
 - [number recognization by cnn](https://github.com/zlxy9892/ml_code/tree/master/number_recognization)
 - [text classification by cnn](https://github.com/zlxy9892/text-classification-by-cnn)
 - [cnn classification (dog vs cat)](https://github.com/zlxy9892/cnn-classification-dog-vs-cat)
-
-
-
