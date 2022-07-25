@@ -1,4 +1,9 @@
-# ml_code
+# Machine Learning Algorithms
+
+The repository has been updated and transferred to:
+
+https://github.com/leizhang-geo/machine_learning_algorithms.git
+
 A repository for recording machine learning code, including basic ml algorithms by using python (numpy). Also some very useful codes of [scikit-learn](http://scikit-learn.org/) and [tensorflow](https://www.tensorflow.org/).
 
 ## 1 basic algorithms practice
@@ -29,3 +34,9 @@ A repository for recording machine learning code, including basic ml algorithms 
 - [number recognization by cnn](https://github.com/zlxy9892/ml_code/tree/master/number_recognization)
 - [text classification by cnn](https://github.com/zlxy9892/text-classification-by-cnn)
 - [cnn classification (dog vs cat)](https://github.com/zlxy9892/cnn-classification-dog-vs-cat)
+
+## Contact
+
+For questions and more details of our study please contact the author: Lei Zhang 张磊 (lei.zhang.geo@outlook.com)
+
+Lei Zhang's [Homepage](https://leizhang-geo.github.io/)
